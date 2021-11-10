@@ -139,7 +139,8 @@
 			\large\subject \hfill  \large\submissiondate \\
 			\rule{\textwidth}{1.5pt}\\[0cm]
 			{\huge \bfseries \ibtitle \par \ }\\[-0.5cm]
-			\rule{\textwidth}{1.5pt}\\[2.5cm]
+			\rule{\textwidth}{1.5pt}\\[0.5cm]
+			{\Large \rq }\\[2cm]
 			\hfill  by\\[0.5cm]
 			\hfill  {\large \bfseries\name}\\[0.25cm]
 			\hfill  {\large IB Candidate Number: \ibnum}\\

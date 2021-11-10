@@ -15,8 +15,8 @@
 %	REQUIRED PACKAGES AND  CONFIGURATIONS
 %-------------------------------------------------------------------------------
 
-\documentclass[temporary]{ib_template} % Temporary version for thesis revision and examination
-%\documentclass[final]{ib_template} % Final version for thesis submission
+\documentclass[temporary]{ib_template} % Temporary version for paper revision and examination
+%\documentclass[final]{ib_template} % Final version for paper submission
 
 % The documentclass ib_template includes the following packages: geometry, caption, xkeyval
 
@@ -25,7 +25,7 @@
 \usepackage[T1]{fontenc} % Font encoding
 
 \usepackage{graphicx} % For including images
-\graphicspath{{./Images/}} % Specifies the directory where pictures are stored
+\graphicspath{{./img/}} % Specifies the directory where pictures are stored
 
 
 \usepackage{setspace} % For using single or double spacing
@@ -33,7 +33,8 @@
 \usepackage{pdfpages} % To include a pdf files of your published papers as an appendix
 \usepackage{fancyhdr} % For the headers
 \usepackage{hyperref} % Adds clickable links at references
-
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 %----------------------------------------------------------------------------------------
 %	ADD YOUR PACKAGES (be careful of package interaction)
 %----------------------------------------------------------------------------------------
@@ -49,25 +50,12 @@
 \newcommand{\eea}{\end{eqnarray}}
 \newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
 
-% Example of Defining a theorem box for Criteria 
-\newtheorem{critere}{Criterion}
-\newcommand{\crit}[2]{
-	\begin{center}
-		\fbox{ \begin{minipage}[c]{0.9 \textwidth}
-				\begin{critere}
-					\textbf{\textup{ #1}} --- #2
-				\end{critere}
-	\end{minipage}  } \end{center}
-}
-
 %----------------------------------------------------------------------------------------
 %	PICK YOUR BIBLIOGRAPHY STYLE
 %----------------------------------------------------------------------------------------
 
-\usepackage[square, numbers, sort&compress]{natbib} % for bibliography - Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed (as in [4-7])
-%\usepackage[longnamesfirst,round]{natbib} % Natural Sciences bibliography
-
-\bibliographystyle{Sources/apa} % You may use a different style adapted to your field
+\usepackage[round]{natbib} 
+\bibliographystyle{bib/apa} % You may use a different style adapted to your field
 % \bibliographystyle{apa} % You may use a different style adapted to your field
 
 %-------------------------------------------------------------------------------
@@ -77,86 +65,89 @@
 \begin{document}
 \pagestyle{empty} % No page numbers
 
-\putee{
-	ibtitle=\LaTeX\ IB EE Template, % Title of the thesis
-	rq = {This is an example research question?},
-	name = John Doe,
-	subject = Subject,
-	submissiondate={March 2018},  % Submission date "Month, year"
-	wordcount={1000}
-}
-
-% \putia{
-% 	ibtitle=\LaTeX\ IB IA Template, % Title of the thesis
-% 	subject = Subject,
+% \putee{
+% 	ibtitle=\LaTeX\ IB EE Template, % Title of the paper
+% 	rq = {This is an example research question?},
 % 	name = John Doe,
-% 	supervisor = {Jane Doe},
-% 	submissiondate={May 2020},  % Submission date "Month, year"
-% 	wordcount={1000},
-% 	ibnum={000000}
+% 	subject = Subject,
+% 	submissiondate={March 2018},  % Submission date "Month, year"
+% 	wordcount={1000}
 % }
+
+\putia{
+	ibtitle=\LaTeX\ IB IA Template,% Title of the paper
+	rq= {Example Subtitle}, % Subtitle of the paper
+	subject = Subject, % Subject
+	name = John Doe, % Name
+	supervisor = {Jane Doe}, % Supervisor Name
+	submissiondate={May 2020},  % Exam session "Month Year"
+	wordcount={1000}, % Wordcount
+	ibnum={000000} % IB Student Number
+}
 
 
 %-------------------------------------------------------------------------------
-%	PREAMBLE PAGES (delete unnecessary pages)
+%	PREAMBLE PAGES (comment unnecessary pages)
 %-------------------------------------------------------------------------------
 
 \startpreamble
 
-% \input{Preamble/declaration}
-\input{Preamble/abstract}
-% \input{Preamble/acknowledgments}
-% \input{Preamble/abbreviations}
-% \input{Preamble/glossary}
-% \input{Preamble/nomenclature}
-% \input{Preamble/dedication}
+% \input{pre/declaration}
+% \input{pre/abstract}
+% \input{pre/acknowledgments}
+% \input{pre/abbreviations}
+% \input{pre/glossary}
+% \input{pre/nomenclature}
+% \input{pre/dedication}
 
 %-------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES
 %-------------------------------------------------------------------------------
 \unnumberedsection{Contents}
+\singlespacing
 \tableofcontents % Write out the Table of Contents
+\doublespacing
+
 % \unnumberedsection{List of Figures}
 % \listoffigures % Write out the List of Figures
+
 % \unnumberedsection{List of Tables}
 % \listoftables % Write out the List of Tables
 
 %-------------------------------------------------------------------------------
-%	THESIS MAIN TEXT
+%	PAPER MAIN TEXT
 %-------------------------------------------------------------------------------
 
-\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-\unnumberedsection{Introduction} % Title of the unnumbered chapter
-\input{MainText/introduction} % Introduction (unnumbered)
+\unnumberedsection{Introduction} % Title of the unnumbered section
+\input{src/introduction} % Introduction (unnumbered)
 
-\numberedsection % Regular chapters following
-\input{MainText/section1} % Input your chapters here
-% \input{MainText/section2}
-% \input{MainText/section3}
-%\input{MainText/chapter4}
-%\input{MainText/chapter5}
+\numberedsection % Regular sections following
+\input{src/section1} % Input your sections here
+\input{src/section2}
+\input{src/section3}
 
-\unnumberedsection{Conclusion} % Title of the unnumbered chapter
-\input{MainText/conclusion} % Conclusion (unnumbered)
+\unnumberedsection{Conclusion} % Title of the unnumbered section
+\input{src/conclusion} % Conclusion (unnumbered)
 
 %-------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------------
 
 \addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-\unnumberedsection{Bibliography} % Title of the unnumbered chapter
-\bibliography{Sources/bibliography} % The references information are stored in the file named "Thesis_bibliography.bib"
+\unnumberedsection{Bibliography} % Title of the unnumbered section
+\bibliography{bib/bibliography} % The references information are stored in the file named "bibliography.bib"
 
 %-------------------------------------------------------------------------------
 %	APPENDICES (optional)
 %-------------------------------------------------------------------------------
 
-\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-\appendix
-\numberedsection % Regular chapters following
-\input{MainText/appendixA}
-%\input{MainText/appendixB}
-%\input{MainText/appendixC}
+% \addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+% \appendix
+% \numberedsection % Regular sections following
+% \input{src/appendixA}
+%\input{src/appendixB}
+%\input{src/appendixC}
 
 \end{document}
