@@ -84,69 +84,47 @@
 \define@key[IB]{title}{submissiondate}{\def\submissiondate{#1}}
 \define@key[IB]{title}{wordcount}{\def\wordcount{#1}}
 
-\define@key[IB]{title}{name}{\def\name{#1}}
+\newif\if@nameexist\@nameexistfalse
+\newif\if@supervisorexist\@supervisorexistfalse
+\newif\if@schoolexist\@schoolexistfalse
+
+
+\define@key[IB]{title}{name}{\def\name{#1}\@nameexisttrue}
 \define@key[IB]{title}{ibnum}{\def\ibnum{#1}}
-\define@key[IB]{title}{supervisor}{\def\supervisor{#1}}
+\define@key[IB]{title}{school}{\def\school{#1}\@schoolexisttrue}
+\define@key[IB]{title}{supervisor}{\def\supervisor{#1}\@supervisorexisttrue}
+
 
 %-------------------------------------------------------------------------------
-%	BUILDING THE TITLE PAGE FOR EE
+%	BUILDING THE TITLE PAGE
 %-------------------------------------------------------------------------------
 
-\providecommand{\putee}{}
-\renewcommand{\putee}[1]{
-	\@putee{}{#1}
+\providecommand{\puttitle}{}
+\renewcommand{\puttitle}[1]{
+	\@puttitle{}{#1}
 }
 
-\providecommand{\@putee}{}
-\renewcommand{\@putee}[2]{%
+\providecommand{\@puttitle}{}
+\renewcommand{\@puttitle}[2]{%
 	\setkeys[IB]{title}{#2}
 
 	\begin{titlepage}
 		\begin{center}
 			\vfill
-			\vspace*{\fill}
-			\large\subject \hfill  \large\submissiondate \\
-			\rule{\textwidth}{1.5pt}\\[0cm]
-			{\huge \bfseries \ibtitle \par \ }\\[-0.5cm]
-			\rule{\textwidth}{1.5pt}\\[0.5cm]
-			{\Large \rq }\\[0.7cm]
-			\vfill
-			\vspace*{\fill}
-			\vspace{0.5cm}
-			{\hfill \large Word Count: \textbf{\wordcount}} \\
-		\end{center}
-	\end{titlepage}
-}
-
-%-------------------------------------------------------------------------------
-%	BUILDING THE TITLE PAGE FOR IA
-%-------------------------------------------------------------------------------
-
-\providecommand{\putia}{}
-\renewcommand{\putia}[1]{
-	\@putia{}{#1}
-}
-
-\providecommand{\@putia}{}
-\renewcommand{\@putia}[2]{%
-	\setkeys[IB]{title}{#2}
-
-	\begin{titlepage}
-		\begin{center}
-			\vfill
-			{\large \scshape Upper Canada College}\\[0.7cm]
+			\if@schoolexist{\large \scshape \school \\[0.7cm]}\else\fi
 			\vspace*{\fill}
 			\large\subject \hfill  \large\submissiondate \\
 			\rule{\textwidth}{1.5pt}\\[0cm]
 			{\huge \bfseries \ibtitle \par \ }\\[-0.5cm]
 			\rule{\textwidth}{1.5pt}\\[0.5cm]
 			{\Large \rq }\\[2cm]
-			\hfill  by\\[0.5cm]
+			\if@nameexist{\hfill  by\\[0.5cm]
 			\hfill  {\large \bfseries\name}\\[0.25cm]
-			\hfill  {\large IB Candidate Number: \ibnum}\\
+			\hfill  {\large IB Candidate Number: \ibnum}
+			}\else\fi
 			\vfill
 			\vspace*{\fill}
-			\hfill \large Supervisor: \textbf{\supervisor} \\
+			\if@supervisorexist{\hfill \large Supervisor: \textbf{\supervisor} \\}\else\fi
 			\vspace{0.5cm}
 			{\hfill \large Word Count: \textbf{\wordcount}} \\
 			
