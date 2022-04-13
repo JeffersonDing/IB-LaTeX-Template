@@ -46,9 +46,10 @@
 %----------------------------------------------------------------------------------------
 
 % Example of New Commands
-\newcommand{\bea}{\begin{eqnarray}} % Shortcut for equation arrays
-\newcommand{\eea}{\end{eqnarray}}
-\newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
+\newcommand{\quickwordcount}[1]{%
+  \immediate\write18{texcount -1 -sum -merge -q #1.tex output.bbl > #1-words.sum }%
+  \input{#1-words.sum}%
+}
 
 %----------------------------------------------------------------------------------------
 %	PICK YOUR BIBLIOGRAPHY STYLE
@@ -73,7 +74,7 @@
 	name = John Doe, % Name (REMOVE FOR EE)
 	supervisor = {Jane Doe}, % Supervisor Name (REMOVE FOR EE)
 	submissiondate={May 2020},  % Exam session "Month Year"
-	wordcount={1000}, % Wordcount
+	wordcount=\quickwordcount{main}, % Wordcount
 	ibnum={000000} % IB Student Number (REMOVE FOR EE)
 }
 
